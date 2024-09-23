@@ -32,7 +32,7 @@ function CartList() {
   };
 
   return (
-    <div className="container mx-auto mt-10">
+    <div className="container w-70 mx-auto mt-10">
       {/* Cart Header */}
       <div className="border rounded-lg p-4 mb-6 flex justify-between items-center">
         <h5 className="text-xl font-semibold">Cart ({cartItems.length})</h5>
@@ -65,7 +65,7 @@ function CartList() {
                 className="h-40 w-40 object-cover rounded-lg"
               />
               <button
-                className="absolute bottom-4 right-4 bg-gray-600 text-white px-3 py-1 rounded"
+                className="absolute bottom-4 right-50 bg-gray-600 text-white px-3 py-1 rounded"
                 onClick={() => handleRemoveItem(item.id)}
               >
                 Remove-
