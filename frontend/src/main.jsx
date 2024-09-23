@@ -14,6 +14,8 @@ import CartList from "./Components/CartList";
 import ShimmerLoader from "./Components/ShimmerLoader";
 import SearchCityContextProvider from "./utils/context/SearchCityContextProvider";
 import appStore from "./utils/redux/appStore";
+import { Auth0Provider } from '@auth0/auth0-react';
+import Profile from './Components/Profile.jsx';
 // eslint-disable-next-line react-refresh/only-export-components
 const Grocery = lazy(()=>import("./Components/Grocery"));
 const appRouter = createBrowserRouter(
@@ -23,6 +25,7 @@ const appRouter = createBrowserRouter(
           <Route path="/about" element ={<About />}/>
           <Route path="/contact" element ={<Contact />}/>
           <Route path="/cart" element ={<CartList />}/>
+          <Route path="/profile" element={<Profile/>}/>
           <Route path="/restaurant/:resId" element ={<RestaurantMenu />}/>
           <Route path="/grocery" element = {<Suspense fallback={<ShimmerLoader/>}>
               <Grocery/>
@@ -34,7 +37,15 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={appStore}>
         <SearchCityContextProvider>
+          <Auth0Provider
+            domain="dev-luf8281njuxcdew0.us.auth0.com"
+            clientId="1xSzChbARd2q63rIxgMLtgreFLfLp6ap"
+            authorizationParams={{
+              redirect_uri: window.location.origin
+            }}
+          >
             <RouterProvider router={appRouter} />
+            </Auth0Provider>
         </SearchCityContextProvider>
     </Provider>
   </StrictMode>,
