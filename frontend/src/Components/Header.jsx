@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import SearchCityContext from "../utils/context/SearchCityContext";
 import { useSelector } from "react-redux";
-import { logoURL } from "../utils/constants";
 import logo from '../assets/food-court-logo.jpg';
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./LoginButton";
