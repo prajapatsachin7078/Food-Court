@@ -32,7 +32,7 @@ function CartList() {
   };
 
   return (
-    <div className="container w-70 mx-auto mt-10">
+    <div className="container w-70 min-h-[50vh] mx-auto mt-10">
       {/* Cart Header */}
       <div className="border rounded-lg p-4 mb-6 flex justify-between items-center">
         <h5 className="text-xl font-semibold">Cart ({cartItems.length})</h5>
