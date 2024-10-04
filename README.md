@@ -32,12 +32,6 @@ Food Court is a web application that integrates various technologies to provide 
   - Vite (for development and build)
   - React Router (for routing)
 
-    <!-- Working on Backend -->
-<!-- - **Backend**:
-  - Node.js (for backend services)
-  - Express.js (for server-side logic)
-  - MongoDB (for database) -->
-
 - **Utilities**:
   - Redux (for state management)
   - Custom Hooks (for reusable logic)
@@ -49,7 +43,7 @@ To get started with the project, follow these steps:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/food-court.git
+   git clone https://github.com/prajapatsachin7078/food-court.git
    ```
 
 2. **Navigate to the Project Directory**
