@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import SearchCityContext from "../utils/context/SearchCityContext";
 import { useSelector } from "react-redux";
 import logo from '../assets/food-court-logo.jpg';
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./LoginButton";
+import {ClipLoader} from 'react-spinners'
+
 
 export const Header = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -12,12 +14,28 @@ export const Header = () => {
   const [city, setCity] = useState('');
   const { handleCityNameUpdate } = useContext(SearchCityContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoading,setIsLoading] = useState(false);
   const navigate = useNavigate();
-
   const handleProfileClick = () => {
     navigate("/profile");
   };
 
+  const handleCitySearch = ()=>{
+
+    if(city.trim()===''){
+      alert("Please provide a valid city name!")
+      return;
+    }
+    setIsLoading(true);
+    handleCityNameUpdate(city);
+    setCity("");
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1200);
+    
+  }
+
+useEffect(()=>{},[isLoading]);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -51,14 +69,15 @@ export const Header = () => {
               type="text"
               className="form-input border rounded-md p-2"
               placeholder="Search city"
+              value={city}
               onChange={(e) => setCity(e.target.value)}
             />
             <button
-              className="ml-2 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+              className="ml-2 bg-green-500 min-w-20 text-center text-white px-4 py-2 rounded-md hover:bg-green-600"
               type="button"
-              onClick={() => handleCityNameUpdate(city)}
+              onClick={handleCitySearch}
             >
-              Search
+              {isLoading ? <ClipLoader size={20} color="white" /> : "Search"}
             </button>
           </div>
 
@@ -67,7 +86,11 @@ export const Header = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? "text-red-500 border-b-2 border-red-500" : "text-gray-500"}`
+                  `nav-link ${
+                    isActive
+                      ? "text-red-500 border-b-2 border-red-500"
+                      : "text-gray-500"
+                  }`
                 }
                 to="/"
               >
@@ -77,7 +100,11 @@ export const Header = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? "text-red-500 border-b-2 border-red-500" : "text-gray-500"}`
+                  `nav-link ${
+                    isActive
+                      ? "text-red-500 border-b-2 border-red-500"
+                      : "text-gray-500"
+                  }`
                 }
                 to="/about"
               >
@@ -87,7 +114,11 @@ export const Header = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? "text-red-500 border-b-2 border-red-500" : "text-gray-500"} whitespace-nowrap flex-shrink-0`
+                  `nav-link ${
+                    isActive
+                      ? "text-red-500 border-b-2 border-red-500"
+                      : "text-gray-500"
+                  } whitespace-nowrap flex-shrink-0`
                 }
                 to="/contact"
               >
@@ -97,7 +128,11 @@ export const Header = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? "text-red-500 border-b-2 border-red-500" : "text-gray-500"}`
+                  `nav-link ${
+                    isActive
+                      ? "text-red-500 border-b-2 border-red-500"
+                      : "text-gray-500"
+                  }`
                 }
                 to="/grocery"
               >
@@ -108,7 +143,10 @@ export const Header = () => {
             <li>
               <Link to="/cart" className="relative text-2xl ml-4">
                 🛒
-                <span id="cart-size" className="absolute top-0 right-0 block w-4 h-4 text-xs font-semibold text-white bg-green-500 rounded-full transform translate-x-1/2 -translate-y-1/2">
+                <span
+                  id="cart-size"
+                  className="absolute top-0 right-0 block w-4 h-4 text-xs font-semibold text-white bg-green-500 rounded-full transform translate-x-1/2 -translate-y-1/2"
+                >
                   {cartItem.length}
                 </span>
               </Link>
@@ -141,14 +179,15 @@ export const Header = () => {
                 type="text"
                 className="form-input border rounded-md p-2"
                 placeholder="Search city"
+                value={city}
                 onChange={(e) => setCity(e.target.value)}
               />
               <button
-                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+                className="ml-2 bg-green-500 min-w-20 text-center text-white px-4 py-2 rounded-md hover:bg-green-600"
                 type="button"
-                onClick={() => handleCityNameUpdate(city)}
+                onClick={handleCitySearch}
               >
-                Search
+                {isLoading ? <ClipLoader size={20} color="white" /> : "Search"}
               </button>
 
               {/* Mobile Navbar Links */}
