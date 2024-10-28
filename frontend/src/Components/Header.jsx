@@ -31,7 +31,7 @@ export const Header = () => {
     setCity("");
     setTimeout(() => {
       setIsLoading(false);
-    }, 1200);
+    }, 1500);
     
   }
 
